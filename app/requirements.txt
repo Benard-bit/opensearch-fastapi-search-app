@@ -1,0 +1,7 @@
+opensearch-py==2.4.2
+fastapi
+uvicorn[standard]
+python-dotenv
+jinja2
+pytest
+httpx

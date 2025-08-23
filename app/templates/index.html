@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск по документам</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+        form { margin-bottom: 20px; }
+        input[type="text"] { width: 300px; padding: 5px; }
+        .result { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        .result h3 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <h1>Поиск по документам</h1>
+    <form action="/" method="get">
+        <input type="text" name="q" placeholder="Введите ключевое слово..." value="{{ query or '' }}">
+
+        <fieldset>
+            <legend>Тип контента:</legend>
+            <input type="radio" name="content_type" value="all" {% if selected_content_type == 'all' %}checked{% endif %}> Все
+            <input type="radio" name="content_type" value="article" {% if selected_content_type == 'article' %}checked{% endif %}> Статья
+            <input type="radio" name="content_type" value="guide" {% if selected_content_type == 'guide' %}checked{% endif %}> Гайд
+            <input type="radio" name="content_type" value="book" {% if selected_content_type == 'book' %}checked{% endif %}> Книга
+            <input type="radio" name="content_type" value="news" {% if selected_content_type == 'news' %}checked{% endif %}> Новость
+        </fieldset>
+
+        <button type="submit">Найти</button>
+    </form>
+
+    {% if results %}
+        <h2>Результаты поиска:</h2>
+        {% for result in results %}
+            <div class="result">
+                <h3>{{ result.title }}</h3>
+                <p>{{ result.snippet }}</p>
+            </div>
+        {% endfor %}
+    {% elif query %}
+        <p>Ничего не найдено по запросу "{{ query }}".</p>
+    {% endif %}
+</body>
+</html>
